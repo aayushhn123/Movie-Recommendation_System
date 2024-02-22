@@ -1,0 +1,7 @@
+How to check effieciency of algo
+
+Multiple test cases (multiple radius and screens)
+
+Parameter to check output
+
+total 15 papers
