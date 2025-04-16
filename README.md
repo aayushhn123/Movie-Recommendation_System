@@ -2,8 +2,8 @@
 
 This repository contains two Jupyter notebooks analyzing the TMDB 5000 dataset, plus a Streamlit app for interactive movie recommendations:
 
-1. **SSDI_Project_1_Movie_Data_Analysis.ipynb**: Predicts movie success (vote average ≥ 7) using Logistic Regression and Naive Bayes.
-2. **SSDI_Project_2_Movie_Recommendation_System.ipynb**: Recommends similar movies using cosine similarity.
+1. **Movie_Data_Analysis.ipynb**: Predicts movie success (vote average ≥ 7) using Logistic Regression and Naive Bayes.
+2. **Movie_Recommendation_System.ipynb**: Recommends similar movies using cosine similarity.
 3. **Streamlit App**: A user-friendly UI hosted on Streamlit to explore movie recommendations.
 
 ## Projects
