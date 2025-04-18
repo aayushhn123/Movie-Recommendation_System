@@ -33,8 +33,8 @@ This repository contains two Jupyter notebooks analyzing the TMDB 5000 dataset, 
 
 
 ## Usage
-- **Project 1**: Run `SSDI_Project_1_Movie_Data_Analysis.ipynb` to train and evaluate models.
-- **Project 2**: Run `SSDI_Project_2_Movie_Recommendation_System.ipynb`. Use `recommend('Batman')` for suggestions.
+- **Project 1**: Run `Movie_Data_Analysis.ipynb` to train and evaluate models.
+- **Project 2**: Run `Movie_Recommendation_System.ipynb`. Use `recommend('Batman')` for suggestions.
 - **Streamlit**: Visit [https://movie-recommendation-system-cosine-similarity.streamlit.app/] or run `streamlit run app.py` locally to use the UI.
 
 ## Results
