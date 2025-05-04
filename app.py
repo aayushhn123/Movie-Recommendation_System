@@ -8,7 +8,7 @@ def fetch_poster_omdb(movie_title):
     api_key = "980f4407"
     url = f"http://www.omdbapi.com/?t={movie_title}&apikey={api_key}"
     try:
-        response = requests.get(url, timeout=5)
+        response = requests.get(url, timeout=10)
         data = response.json()
         if data['Response'] == 'True' and data['Poster'] != "N/A":
             return data['Poster']
