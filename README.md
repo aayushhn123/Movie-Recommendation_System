@@ -20,22 +20,25 @@ This repository contains two Jupyter notebooks analyzing the TMDB 5000 dataset, 
 
 ### Streamlit App
 - **Description**: Interactive web app for movie recommendations with a sleek UI.
-- **Access**: Hosted at [https://movie-recommendation-system-cosine-similarity.streamlit.app/].
+- **Access**: Hosted at [https://movierecommendationsystem-28012005.streamlit.app/].
 - **Usage**: Select a movie to get instant recommendations.
 
 ## Dataset
 - **TMDB 5000**: `tmdb_5000_movies.csv` and `tmdb_5000_credits.csv`.
 - Download from [Kaggle](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata) and place in the project directory.
 
+## Pickle Files Google Drive Link:
+- [Drive](https://drive.google.com/drive/folders/1-28gSzrbDnaiIQl2fodtGsToXCs4SdR2?usp=sharing)
+
 ## Requirements
 
-- Requires: `numpy`, `pandas`, `scikit-learn`, `statsmodels`, `nltk`, `pickle`, `streamlit`.
+- Requires: `numpy`, `pandas`, `scikit-learn`, `statsmodels`, `nltk`, `pickle`, `streamlit`, `gdown`.
 
 
 ## Usage
 - **Project 1**: Run `Movie_Data_Analysis.ipynb` to train and evaluate models.
 - **Project 2**: Run `Movie_Recommendation_System.ipynb`. Use `recommend('Batman')` for suggestions.
-- **Streamlit**: Visit [https://movie-recommendation-system-cosine-similarity.streamlit.app/] or run `streamlit run app.py` locally to use the UI.
+- **Streamlit**: Visit [https://movierecommendationsystem-28012005.streamlit.app/] or run `streamlit run app.py` locally to use the UI.
 
 ## Results
 - **Project 1**: Logistic Regression outperforms Naive Bayes (MSE: 0.1725 vs. 0.2185).
