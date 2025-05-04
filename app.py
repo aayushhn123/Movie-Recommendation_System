@@ -3,62 +3,67 @@ import streamlit as st
 import pickle
 import pandas as pd
 
+# ------------------- Poster from OMDb -------------------
+def fetch_poster_omdb(movie_title):
+    api_key = "980f4407"
+    url = f"http://www.omdbapi.com/?t={movie_title}&apikey={api_key}"
+    try:
+        response = requests.get(url, timeout=5)
+        data = response.json()
+        if data['Response'] == 'True' and data['Poster'] != "N/A":
+            return data['Poster']
+        else:
+            return "https://via.placeholder.com/500x750.png?text=Not+Found"
+    except Exception as e:
+        st.error(f"OMDb API error: {e}")
+        return "https://via.placeholder.com/500x750.png?text=Error"
 
-def fetch_poster(movie_id):
-    response = requests.get(
-        'https://api.themoviedb.org/3/movie/{}?api_key=01e5f1fa40a068be89fa790aba403e58'.format(movie_id))
-    data = response.json()
-    return "https://image.tmdb.org/t/p/w500/" + data['poster_path']
-
-
+# ------------------- Recommendation Function -------------------
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
     movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]
 
     recommended_movies = []
-
     recommended_movies_posters = []
+
     for i in movies_list:
-        movie_id = movies.iloc[i[0]].movie_id
-        # fetch poster from api
-        recommended_movies.append(movies.iloc[i[0]].title)
-        recommended_movies_posters.append(fetch_poster(movie_id))
+        title = movies.iloc[i[0]].title
+        recommended_movies.append(title)
+        recommended_movies_posters.append(fetch_poster_omdb(title))
+
     return recommended_movies, recommended_movies_posters
 
-
+# ------------------- Load Data -------------------
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
-
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 
-st.title('Movie Recommendation System')
-selected_movie_name = st.selectbox('What is your favourite movie??', movies['title'].values)
+# ------------------- UI Starts Here -------------------
+st.set_page_config(layout="wide")
+st.markdown("<h1 style='text-align: center; color: #FF4B4B;'>🎬 Movie Recommendation System 🍿</h1>", unsafe_allow_html=True)
+st.markdown("---")
 
-if st.button('Recommend'):
+selected_movie_name = st.selectbox('Select your favourite movie:', movies['title'].values)
+
+if st.button('🎯 Recommend'):
     names, posters = recommend(selected_movie_name)
 
-    col1, col2, col3, col4, col5 = st.columns(5)
+    st.markdown("### 🔥 Top 5 Recommendations:")
 
-    with col1:
-        st.text(names[0])
-        st.image(posters[0])
+    cols = st.columns(5)
+    for i in range(5):
+        with cols[i]:
+            st.image(posters[i], use_container_width=True, caption=f"🎞️ {names[i]}")
+            st.markdown("<br>", unsafe_allow_html=True)
 
-    with col2:
-        st.text(names[1])
-        st.image(posters[1])
-
-    with col3:
-        st.text(names[2])
-        st.image(posters[2])
-
-    with col4:
-        st.text(names[3])
-        st.image(posters[3])
-
-    with col5:
-        st.text(names[4])
-        st.image(posters[4])
-
-    st.write('Feedback Form : https://forms.gle/BzMJgVgXNhoE5qJc9')
-
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center;">
+        <a href="https://forms.gle/BzMJgVgXNhoE5qJc9" target="_blank" style="text-decoration: none;">
+            <button style="background-color: #4CAF50; color: white; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px;">
+                ✍️ Submit Feedback
+            </button>
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
