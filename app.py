@@ -2,6 +2,10 @@ import requests
 import streamlit as st
 import pickle
 import pandas as pd
+import gdown  # For downloading .pkl files from Google Drive
+
+# ------------------- Download .pkl files from Google Drive -------------------
+
 
 # ------------------- Poster from OMDb -------------------
 def fetch_poster_omdb(movie_title):
@@ -35,6 +39,16 @@ def recommend(movie):
     return recommended_movies, recommended_movies_posters
 
 # ------------------- Load Data -------------------
+import os
+import gdown
+
+# Only download if not already present
+if not os.path.exists("movie_dict.pkl"):
+    gdown.download("https://drive.google.com/uc?id=1B3fRBnl0G39pOGPUv428ChMpAP2df2Yy", "movie_dict.pkl", quiet=False)
+
+if not os.path.exists("similarity.pkl"):
+    gdown.download("https://drive.google.com/uc?id=1uQ-aMCcNZfjrNqazr5qmjl_alz28X2k0", "similarity.pkl", quiet=False)
+
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('similarity.pkl', 'rb'))
